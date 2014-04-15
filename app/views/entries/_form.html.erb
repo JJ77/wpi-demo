@@ -1,0 +1,72 @@
+<%= form_for @entry do |f| %>
+
+    <% if @entry.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this inventory_entry from being saved:</h2>
+
+        <ul>
+          <% @entry.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class= "col-lg-12">
+    <div class="col-md-3">
+      <%= f.label :plant_id %><br>
+      <%= f.collection_select :plant_id, Plant.order(:description),:id,:description, include_blank: true %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :stick_week %><br>
+      <%= f.number_field :stick_week %>
+    </div>
+
+    <div class="col-md-3">
+      <%= f.label :pots %><br>
+      <%= f.number_field :pots %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :bed_id %><br>
+      <%= f.collection_select :bed_id, Bed.order(:name),:id,:name, include_blank: true %>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="large-12 large-centered columns">
+
+     <!--<div class="large-3 left columns">
+        <%= f.label :greenhouse_id %><br>
+        <%= f.collection_select :greenhouse_id, Greenhouse.order(:name),:id,:name, include_blank: true %>-->
+      </div>
+    </div>
+  <!--<div class="large-3 left columns">
+    <%= f.label :location_id %><br>
+    <%= f.collection_select :location_id, Location.order(:name),:id,:name, include_blank: false %>
+  </div>-->
+</div>
+
+<!-- Child plant fields / jQuery display -->
+<div class="row">
+  <div class="col-md-12">
+    <% @child_plant_list.each do |plant| %>
+      <div class="col-sx-3">
+        <div style="display:none" class=<%= plant.parent_plant_id %>>
+          <strong>Projected</strong> <%=plant.description%>
+        </div>
+        <%= text_field_tag "projected_inventory[#{plant.id}]", nil,  class:"#{plant.parent_plant_id}", style:'display:none', id:".25" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Buttons -->
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <%= f.submit "Create Entry", class:'button' %>
+    <% end %> |
+  </div>
+</div>

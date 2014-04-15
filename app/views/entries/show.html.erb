@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pots:</strong>
+  <%= @entry.pots %>
+</p>
+
+<p>
+  <strong>Stick week:</strong>
+  <%= @entry.stick_week %>
+</p>
+
+<p>
+  <strong>Hang week:</strong>
+  <%= @entry.hang_week %>
+</p>
+
+<p>
+  <strong>Finish week:</strong>
+  <%= @entry.finish_week %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @entry.rating %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @entry.status %>
+</p>
+
+<p>
+  <strong>Plant:</strong>
+  <%= @entry.plant %>
+</p>
+
+<p>
+  <strong>Bed:</strong>
+  <%= @entry.bed %>
+</p>
+
+<p>
+  <strong>Greenhouse:</strong>
+  <%= @entry.greenhouse %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @entry.location %>
+</p>
+
+<%= link_to 'Edit', edit_entry_path(@entry) %> |
+<%= link_to 'Back', entries_path %>

@@ -7,4 +7,9 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  def current_week
+    # Returns an integer representation of current week in year
+		Time.now.strftime("%U").to_i + 1
+	end
+
 end

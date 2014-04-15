@@ -1,0 +1,52 @@
+<%= form_for(@plant) do |f| %>
+  <% if @plant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@plant.errors.count, "error") %> prohibited this plant from being saved:</h2>
+
+      <ul>
+      <% @plant.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :item_code %><br>
+    <%= f.text_field :item_code %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="row">
+      <div class="col-sm-12">
+        <h3> Finish Week </h3>
+        <% 52.times do |week| %>
+        <div class="col-xs-2">
+          <%= f.label "week#{week + 1}" %>
+          <%= text_field_tag "plant[finishtime][]" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <h3>Expiration Week</h3>
+      <div class="col-sm-12">
+        <% 52.times do |week| %>
+        <div class="col-xs-2">
+          <%= f.label "week#{week + 1}" %>
+          <%= text_field_tag "plant[expiration][]" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+
+    <br>
+  <div class="actions">
+    <%= f.submit class:'btn btn-primary' %>
+  </div>
+<% end %>

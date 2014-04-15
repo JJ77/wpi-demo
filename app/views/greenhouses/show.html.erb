@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @greenhouse.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @greenhouse.description %>
+</p>
+
+<p>
+
+
+<%= link_to 'Edit', edit_greenhouse_path(@greenhouse) %> |
+<%= link_to 'Back', greenhouses_path %>

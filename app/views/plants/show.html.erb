@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Item code:</strong>
+  <%= @plant.item_code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @plant.description %>
+</p>
+
+<p>
+  <strong>Finishtime:</strong>
+  <%= @plant.finishtime %>
+</p>
+
+<p>
+  <strong>Expiration:</strong>
+  <%= @plant.expiration %>
+</p>
+
+<p>
+  <strong>Parent plant:</strong>
+  <%= @plant.parent_plant_id %>
+</p>
+
+<%= link_to 'Edit', edit_plant_path(@plant) %> |
+<%= link_to 'Back', plants_path %>
