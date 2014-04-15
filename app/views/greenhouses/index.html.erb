@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Description</th>
       <th>Location</th>
+      <th>Pots</th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,10 +16,10 @@
   <tbody>
     <% @greenhouses.each do |greenhouse| %>
       <tr>
-        <td><%= greenhouse.name %></td>
+        <td><%= link_to greenhouse.name, greenhouse %></td>
         <td><%= greenhouse.description %></td>
         <td><%= greenhouse.location.name %></td>
-        <td><%= link_to 'Show', greenhouse %></td>
+        <td><%= greenhouse.total %></td>
         <td><%= link_to 'Edit', edit_greenhouse_path(greenhouse) %></td>
         <td><%= link_to 'Destroy', greenhouse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

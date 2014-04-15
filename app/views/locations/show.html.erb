@@ -1,14 +1,65 @@
 <p id="notice"><%= notice %></p>
+<h2>
+	<%= @location.name %>
+</h2>
+	<h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Total Pot Space</th>
+      <th>Total Inventory</th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Name:</strong>
-  <%= @location.name %>
-</p>
+  <tbody>
+      <tr>
+        <td><%= @location.address  %></td>
+        <td><%= @location.capacity unless @location.capacity.nil? %></td>
+        <td><%= @location.total unless @location.total.nil? %></td>
 
-<p>
-  <strong>Address:</strong>
-  <%= @location.address %>
-</p>
+      </tr>
+  </tbody>
+</table>
+</h4>
+<h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= link_to "Plant", entries_path(:sort=>:plant_id) %></th>
+      <th><%= link_to "Stick Week", entries_path(:sort=>:stick_week) %></th>
+      <th><%= link_to "Hang Week", entries_path(:sort=>:hang_week) %></th>
+      <th><%= link_to "Finish Week", entries_path(:sort=>:finish_week) %></th>
+      <th><%= link_to "Rating", entries_path(:sort=>:rating) %></th>
+      <th><%= link_to "Bed", entries_path(:sort=>:bed_id) %></th>
+      <th><%= link_to "Pots", entries_path(:sort=>:pots) %></th>
+      <th><%= link_to "House", entries_path(:sort=>:greenhouse_id) %></th>
+      <th><%= link_to "Location", entries_path(:sort=>:location_id) %></th>
+    </tr>
+  </thead>
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+  <tbody>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= link_to entry.plant.description, edit_entry_path(entry) %></td>
+        <td><%= entry.stick_week %></td>
+        <td><%= entry.hang_week %></td>
+        <td><%= entry.finish_week %></td>
+        <td><%= entry.rating %></td>
+        <td><%= entry.bed.name %></td>
+        <td><%= entry.pots %></td>
+        <td><%= entry.greenhouse.name %></td>
+        <td><%= entry.location.name %></td>
+        <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+        <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</h5>
+
+<%= link_to 'Edit Location', edit_location_path(@location), class:'btn btn-primary' %> |
+<%= link_to 'Back', locations_path, class:'btn btn-info' %>
+
+<hr>

@@ -1,5 +1,11 @@
 Wpi::Application.routes.draw do
-  resources :entries
+  resources :projections, only: [:index]
+
+  resources :entries do
+  	member do
+  		delete :wipe
+  	end
+	end
 
   resources :plants
 

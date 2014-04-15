@@ -1,6 +1,6 @@
 class PlantsController < ApplicationController
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_plant_list, only: [:new, :edit]
   # GET /plants
   # GET /plants.json
   def index
@@ -63,6 +63,10 @@ class PlantsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_plant_list
+      @plantlist = Plant.order(:description)
+    end
+
     def set_plant
       @plant = Plant.find(params[:id])
     end

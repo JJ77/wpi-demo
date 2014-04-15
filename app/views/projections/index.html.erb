@@ -1,0 +1,33 @@
+<div class="container-fluid">
+<div class="row">
+  <div class="col-xs-12">
+    <h1>All Projections</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Plant</th>
+          <th>Pots</th>
+          <th>Stick week</th>
+          <th>Finish week</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @entries.each do |entry| %>
+          <tr>
+            <td><%= entry.plant.description %></td>
+            <td><%= entry.pots %></td>
+            <td><%= entry.parent.stick_week %></td>
+            <td><%= entry.finish_week %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Entry', new_entry_path %>
+  </div>
+</div>
+</div>

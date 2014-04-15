@@ -22,7 +22,7 @@
 
 <p>
   <strong>Parent plant:</strong>
-  <%= @plant.parent_plant_id %>
+  <%= Plant.find(@plant.parent_plant_id).description %>
 </p>
 
 <%= link_to 'Edit', edit_plant_path(@plant) %> |

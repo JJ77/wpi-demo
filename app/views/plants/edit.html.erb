@@ -46,21 +46,25 @@
       </div>
     </div>
 
-    <div class="row">
-			<h3>Parent Plants?</h3>
-			<div class="col-sm-12">
-				<div class="col-xs-2">
-					<%= f.label "None" %>
-					<%= f.radio_button :parent_plant_id, "" %>
-				</div>
-				<% Plant.all.each do |plant| %>
-				<div class="col-xs-2">
-					<%= f.label plant.description %>
-					<%= f.radio_button :parent_plant_id, :parent_plant_id %>
-				</div>
-				<% end %>
-			</div>
-		</div>
+   <div class="row">
+      <h3>Parent Plant?</h3>
+      <div class="col-lg-10">
+        <div class="col-xs-2">
+          <%= f.label "None" %>
+          <%= f.radio_button :parent_plant_id, "nil", checked:true %>
+        </div>
+        <% @plantlist.each do |plant| %>
+        <div class="col-xs-2">
+          <%= f.label plant.description %>
+          <% if plant.id == @plant.id %>
+            <%= f.radio_button :parent_plant_id, plant.id, disabled: true %>
+          <% else %>
+            <%= f.radio_button :parent_plant_id, plant.id %>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
 
     <br>
 

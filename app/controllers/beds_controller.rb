@@ -10,7 +10,8 @@ class BedsController < ApplicationController
   # GET /beds/1
   # GET /beds/1.json
   def show
-    @entries = Entry.where(bed_id:params[:id])
+    @history_entries = Entry.where(status:1, bed_id:params[:id]).order(:stick_week)
+    @current_entries = Entry.where(status:0, bed_id:params[:id]).order(:stick_week)
   end
 
   # GET /beds/new

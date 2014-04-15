@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 <h1> Greenhouse <%= @bed.greenhouse.name %> | Bed <%= @bed.name %> </h1>
+
+<h3> Current Inventory </h3>
 <table class="table">
       <thead>
         <tr>
@@ -18,7 +20,7 @@
       </thead>
 
       <tbody>
-        <% @entries.each do |entry| %>
+        <% @current_entries.each do |entry| %>
           <tr>
             <td><%= entry.plant.description %></td>
             <td><%= entry.pots %></td>
@@ -30,7 +32,43 @@
             <td><%= entry.greenhouse.name %></td>
             <td><%= entry.location.name %></td>
             <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-            <td><%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+<h3>Bed History </h3>
+<table class="table">
+      <thead>
+        <tr>
+          <th>Plant</th>
+          <th>Pots</th>
+          <th>Stick week</th>
+          <th>Hang week</th>
+          <th>Finish week</th>
+          <th>Rating</th>
+          <th>Bed</th>
+          <th>Greenhouse</th>
+          <th>Location</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @history_entries.each do |entry| %>
+          <tr>
+            <td><%= entry.plant.description %></td>
+            <td><%= entry.pots %></td>
+            <td><%= entry.stick_week %></td>
+            <td><%= entry.hang_week %></td>
+            <td><%= entry.finish_week %></td>
+            <td><%= entry.rating %></td>
+            <td><%= entry.bed.name %></td>
+            <td><%= entry.greenhouse.name %></td>
+            <td><%= entry.location.name %></td>
+            <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+            <td><%= link_to 'Destroy', wipe_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>

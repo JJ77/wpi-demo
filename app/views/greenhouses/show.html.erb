@@ -1,17 +1,65 @@
 <p id="notice"><%= notice %></p>
+<h2>
+	<%= @greenhouse.name %>
+</h2>
+	<h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Total Pot Space</th>
+      <th>Total Inventory</th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Name:</strong>
-  <%= @greenhouse.name %>
-</p>
+  <tbody>
+      <tr>
+        <td><%= @greenhouse.description  %></td>
+        <td><%= @greenhouse.capacity unless @greenhouse.capacity.nil? %></td>
+        <td><%= @greenhouse.total unless @greenhouse.total.nil? %></td>
 
-<p>
-  <strong>Description:</strong>
-  <%= @greenhouse.description %>
-</p>
+      </tr>
+  </tbody>
+</table>
+</h4>
+<h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= link_to "Plant", entries_path(:sort=>:plant_id) %></th>
+      <th><%= link_to "Stick Week", entries_path(:sort=>:stick_week) %></th>
+      <th><%= link_to "Hang Week", entries_path(:sort=>:hang_week) %></th>
+      <th><%= link_to "Finish Week", entries_path(:sort=>:finish_week) %></th>
+      <th><%= link_to "Rating", entries_path(:sort=>:rating) %></th>
+      <th><%= link_to "Bed", entries_path(:sort=>:bed_id) %></th>
+      <th><%= link_to "Pots", entries_path(:sort=>:pots) %></th>
+      <th><%= link_to "House", entries_path(:sort=>:greenhouse_id) %></th>
+      <th><%= link_to "Location", entries_path(:sort=>:location_id) %></th>
+    </tr>
+  </thead>
 
-<p>
+  <tbody>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= link_to entry.plant.description, edit_entry_path(entry) %></td>
+        <td><%= entry.stick_week %></td>
+        <td><%= entry.hang_week %></td>
+        <td><%= entry.finish_week %></td>
+        <td><%= entry.rating %></td>
+        <td><%= entry.bed.name %></td>
+        <td><%= entry.pots %></td>
+        <td><%= entry.greenhouse.name %></td>
+        <td><%= entry.location.name %></td>
+        <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+        <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
+</h5>
 
-<%= link_to 'Edit', edit_greenhouse_path(@greenhouse) %> |
-<%= link_to 'Back', greenhouses_path %>
+<%= link_to 'Edit Greenhouse', edit_greenhouse_path(@greenhouse), class:'btn btn-primary' %> |
+<%= link_to 'Back', greenhouses_path, class:'btn btn-info' %>
+
+<hr>
