@@ -11,18 +11,8 @@
 </p>
 
 <p>
-  <strong>Finishtime:</strong>
-  <%= @plant.finishtime %>
-</p>
-
-<p>
-  <strong>Expiration:</strong>
-  <%= @plant.expiration %>
-</p>
-
-<p>
   <strong>Parent plant:</strong>
-  <%= Plant.find(@plant.parent_plant_id).description %>
+  <%= @plant.parent_plant_id.nil? ? "None" : Plant.find(@plant.parent_plant_id).description %>
 </p>
 
 <%= link_to 'Edit', edit_plant_path(@plant) %> |

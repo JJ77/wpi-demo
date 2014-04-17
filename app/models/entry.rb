@@ -12,7 +12,7 @@ class Entry < ActiveRecord::Base
       Time.now.strftime("%U").to_i + 1
     end
 
-  def compare(entry)
+  def ==(entry)
     return false unless self.stick_week == entry.stick_week
     return false unless self.pots == entry.pots
     return false unless self.plant_id == entry.plant_id

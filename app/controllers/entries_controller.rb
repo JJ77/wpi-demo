@@ -1,7 +1,6 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:wipe, :show, :edit, :update, :destroy]
   before_action :set_child_plants, only: [:new, :edit]
-
   # GET /entries
   def index
     # Temp code for debugging purposes
@@ -45,7 +44,7 @@ class EntriesController < ApplicationController
   def update
     @old_entry = Entry.find(params[:id])
     @entry = Entry.new(entry_params)
-    unless @old_entry.compare(@entry)
+    unless @old_entry == @entry
       @old_entry.update_attributes(status:1)
       @entry.save
       params[:projections].each do |key, value|
