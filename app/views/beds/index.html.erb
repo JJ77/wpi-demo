@@ -1,13 +1,12 @@
 <h1>All beds</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
       <th>Capacity</th>
       <th>Greenhouse</th>
       <th>Location</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -20,7 +19,6 @@
         <td><%= bed.capacity %></td>
         <td><%= bed.greenhouse.name %></td>
         <td><%= bed.location.name %></td>
-        <td><%= link_to 'Show', bed %></td>
         <td><%= link_to 'Edit', edit_bed_path(bed) %></td>
         <td><%= link_to 'Destroy', bed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

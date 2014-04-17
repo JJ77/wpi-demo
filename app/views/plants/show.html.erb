@@ -1,19 +1,78 @@
 <p id="notice"><%= notice %></p>
+<h1><%= @plant.description %></h1>
+<hr>
+<!--<% @plant.child_plants.each do |plant| %>
+<span id="child"><%= link_to plant.description, plant %></span>
+<%end%> -->
 
-<p>
-  <strong>Item code:</strong>
-  <%= @plant.item_code %>
-</p>
+    <hr><br>
+<h3>Projected Schedule</h3>
+<h5>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% 10.times do |week| %>
+        <th><%= "Week #{weeks_before_now(week)}" %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% 10.times do |week| %>
+        <td> <%= @plant.projected(weeks_before_now(week)) %></td>
+      <% end %>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <% 10.times do |week| %>
+        <th><%= "Week #{weeks_before_now(week + 10)}" %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% 10.times do |week| %>
+        <td> <%= @plant.projected(weeks_before_now(week + 10)) %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+</h5>
+<hr><br>
+<h3>Statistics</h3>
+<h5>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Actual Inventory</th>
+      <th>Projected Inventory</th>
+      <th>Inventory %</th>
+      <th>Rated 5</th>
+      <th>Rated 6</th>
+      <th>Rated 7</th>
 
-<p>
-  <strong>Description:</strong>
-  <%= @plant.description %>
-</p>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Parent plant:</strong>
-  <%= @plant.parent_plant_id.nil? ? "None" : Plant.find(@plant.parent_plant_id).description %>
-</p>
+  <tbody>
+      <tr>
+        <td><%= @plant.actual %></td>
+        <td><%= @plant.projected %></td>
+        <td><%= "Inventory percent" %>%</td>
+        <td><%= @plant.rated(5) %></td>
+        <td><%= @plant.rated(6) %></td>
+        <td><%= @plant.rated(7) %></td>
+      </tr>
+  </tbody>
+</table>
 
-<%= link_to 'Edit', edit_plant_path(@plant) %> |
-<%= link_to 'Back', plants_path %>
+</h5>
+<hr><br>
+<h3>Inventory Report</h3>
+<%= render 'plant_table' %>
+
+<%= link_to 'Edit Plant', edit_plant_path(@plant), class:'btn btn-primary' %> |
+<%= link_to 'Back', plants_path, class:'btn btn-info' %>
+
+<hr>

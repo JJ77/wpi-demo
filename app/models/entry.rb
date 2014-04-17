@@ -7,6 +7,9 @@ class Entry < ActiveRecord::Base
   before_save :set_greenhouse, :set_location
   before_create :set_finish_week, :set_status, :set_rating
 
+
+
+
   def current_week
       # Returns an integer representation of current week in year
       Time.now.strftime("%U").to_i + 1

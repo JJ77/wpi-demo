@@ -25,18 +25,14 @@ class EntriesController < ApplicationController
   # POST /entries
   def create
     @entry = Entry.new(entry_params)
-
-    respond_to do |format|
-      if @entry.save
-        params[:projections].each do |key, value|
-          create_projection(key, value, @entry)
-        end
-        format.html { redirect_to entries_path, notice: 'Entry was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @entry }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @entry.errors, status: :unprocessable_entity }
+    if check_bed && @entry.save
+      params[:projections].each do |key, value|
+        create_projection(key, value, @entry)
       end
+    redirect_to entries_path, notice: 'Entry was successfully created.'
+    else
+      set_child_plants
+      render action: 'new'
     end
   end
 
@@ -69,6 +65,16 @@ class EntriesController < ApplicationController
   end
 
   private
+
+    def check_bed
+      entry = Entry.where(bed_id:params["entry"]["bed_id"], status:0, plant_id:params["entry"]["plant_id"], stick_week:params["entry"]["stick_week"])
+      if entry.empty?
+        true
+      else
+        flash.now[:error] = "That bed already has an entry of that plant on the same week!  #{view_context.link_to('Click here to modify it.', edit_entry_path(entry.first.id))}".html_safe
+        false
+      end
+    end
 
     # Pulls up a projection and updates its pot count
     def update_projection(plant_id, pots, parent)

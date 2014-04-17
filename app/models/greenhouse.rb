@@ -23,6 +23,7 @@ class Greenhouse < ActiveRecord::Base
   end
 
   def capacity
-  	self.beds.pluck(:capacity).inject(:+)
+  	array = self.beds.pluck(:capacity)
+    array.inject(0) {|result, element| result += element.to_i }
   end
 end
