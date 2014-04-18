@@ -8,6 +8,7 @@ class Projection < ActiveRecord::Base
   	Entry.find(self.entry_id)
   end
 
+
   # Returns a projection's parent plant
   def parent_plant
   	Plant.find(self.parent.plant_id)
@@ -33,13 +34,15 @@ class Projection < ActiveRecord::Base
   	end
   	pots.to_i
   end
+
+  def set_finish_week
+    week_array = (1..52).to_a
+    finishtime = (self.parent.growth_cycle * 1.22).round()
+    week_array.rotate!(week_array.index(finishtime + self.parent.stick_week.to_i))
+    self.finish_week = week_array[0]
+  end
+
   private
 
-  	def set_finish_week
-  		week_array = (1..52).to_a
-  		finishtime = self.parent_plant.finishtime[parent.stick_week.to_i]
-  		finishtime *= 1.22
-  		week_array.rotate!(week_array.index(parent.stick_week.to_i + finishtime.to_i))
-  		self.finish_week = week_array[0]
-  	end
+
 end

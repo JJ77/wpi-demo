@@ -22,11 +22,29 @@ class Entry < ActiveRecord::Base
     true
   end
 
+  def grade_week
+      # Uses week_array to find difference between stick_week and finish_week
+      # Then takes 0.667 of that difference and returns the grade week based
+      # on that number.  Grade week occurs 2/3rds into growth cycle.
+      weeks_array = (1..52).to_a
+      weeks_array.rotate!(weeks_array.index((self.stick_week + (self.growth_cycle * 0.6667)).round))
+      weeks_array[0]
+    end
+
+    def growth_cycle
+      weeks_array = (1..52).to_a
+      weeks_array.rotate!(weeks_array.index(self.stick_week))
+      growth_cycle = weeks_array.index(self.finish_week)
+    end
+
   private
     # Callback to set greenhouse before save based strictly on zone
   	def set_greenhouse
   		self.greenhouse_id = Bed.find(self.bed_id).greenhouse_id
   	end
+
+    # Counts total weeks between a entry's stick_week and finish_week
+
 
     # Callback to set location before save based strictly on zone
   	def set_location
