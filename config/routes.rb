@@ -5,6 +5,10 @@ Wpi::Application.routes.draw do
   	member do
   		delete :wipe
   	end
+    collection do
+      get :projection_queue
+      put :projection_conversion
+    end
 	end
 
   resources :plants

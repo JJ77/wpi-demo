@@ -2,6 +2,13 @@ class Projection < ActiveRecord::Base
   belongs_to :plant
   belongs_to :entry
   before_save :set_finish_week
+  before_create :set_delay_week
+
+
+  # Returns an integer representation of current week in year
+  def current_week
+    Time.now.strftime("%U").to_i + 1
+  end
 
   # Returns a projections parent entry
   def parent
@@ -35,11 +42,37 @@ class Projection < ActiveRecord::Base
   	pots.to_i
   end
 
+  # Callback to set finish week based on parent plant with 22% added to time span.
   def set_finish_week
     week_array = (1..52).to_a
     finishtime = (self.parent.growth_cycle * 1.22).round()
     week_array.rotate!(week_array.index(finishtime + self.parent.stick_week.to_i))
     self.finish_week = week_array[0]
+  end
+
+  def set_delay_week
+    self.delay_week = self.parent.grade_week
+  end
+
+  # Checks if a projection's parent entry is on its grade week or its delay week matches current.
+  def ready?
+    week_array = (1..52).to_a
+    past_5_weeks_range = []
+    week_array.rotate!(week_array.index(current_week))
+    5.times do |week|
+      past_5_weeks_range << week_array[0]
+      week_array.rotate!(-1)
+    end
+    self.delay_week == current_week
+  end
+
+  # Iterates over all projections and returns all that are ready
+  def self.ready
+    ready = []
+    Projection.all.each do |entry|
+      ready << entry if entry.ready?
+    end
+    ready
   end
 
   private

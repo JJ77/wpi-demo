@@ -1,4 +1,5 @@
 class PlantsController < ApplicationController
+  helper:plants
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
   before_action :set_plant_list, only: [:new, :edit]
   # GET /plants
@@ -73,7 +74,7 @@ class PlantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plant_params
-      params.require(:plant).permit(:item_code, :description, :parent_plant_id,
-                                     :finishtime => [], :expiration => [] )
+      params.require(:plant).permit(:item_code, :description, :parent_plant_id, :ppprate,
+                                     :finishtime => [], :expiration => [])
     end
 end

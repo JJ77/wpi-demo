@@ -7,7 +7,6 @@
   <thead>
     <tr>
       <th>Address</th>
-      <th>Total Pot Space</th>
       <th>Total Inventory</th>
     </tr>
   </thead>
@@ -15,7 +14,6 @@
   <tbody>
       <tr>
         <td><%= @location.address  %></td>
-        <td><%= @location.capacity unless @location.capacity.nil? %></td>
         <td><%= @location.total unless @location.total.nil? %></td>
 
       </tr>

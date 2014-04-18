@@ -4,7 +4,12 @@
 <!--<% @plant.child_plants.each do |plant| %>
 <span id="child"><%= link_to plant.description, plant %></span>
 <%end%> -->
-
+  <div class="col-lg-3">
+      Search by plant:
+      <%= select("plant", "id",
+                  plant_array, {:include_blank => true},
+                  { :onchange => "window.location='/plants/'+this.value;" } ) %>
+    </div>
     <hr><br>
 <h3>Projected Schedule</h3>
 <h5>
@@ -59,7 +64,7 @@
       <tr>
         <td><%= @plant.actual %></td>
         <td><%= @plant.projected %></td>
-        <td><%= "Inventory percent" %>%</td>
+        <td><%= @plant.inventory_percent %>%</td>
         <td><%= @plant.rated(5) %></td>
         <td><%= @plant.rated(6) %></td>
         <td><%= @plant.rated(7) %></td>

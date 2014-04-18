@@ -1,6 +1,6 @@
 class Location < ActiveRecord::Base
-	has_many :greenhouses
-	has_many :beds
+	has_many :greenhouses, dependent: :destroy
+	has_many :beds, dependent: :destroy
 
 	  # Array of all beds in location
   def beds
@@ -23,6 +23,7 @@ class Location < ActiveRecord::Base
   end
 
   def capacity
-  	self.beds.pluck(:capacity).inject(:+)
+    array = self.beds.pluck(:capacity)
+    array.inject(0) {|result, element| result += element.to_i }
   end
 end

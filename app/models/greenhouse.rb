@@ -1,6 +1,6 @@
 class Greenhouse < ActiveRecord::Base
   belongs_to :location
-  has_many :beds
+  has_many :beds, dependent: :destroy
 
   # Array of all beds in greenhouse
   def beds

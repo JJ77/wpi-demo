@@ -1,14 +1,16 @@
 class EntriesController < ApplicationController
+  helper:entries
   before_action :set_entry, only: [:wipe, :show, :edit, :update, :destroy]
   before_action :set_child_plants, only: [:new, :edit]
   # GET /entries
   def index
-    # Temp code for debugging purposes
-    #@entries = Entry.order(:stick_week)
-    #Production code!
+    if check_projection_queue
+      redirect_to projection_queue_entries_path
+    elsif params[:plant]
+      redirect_to plant_path(param[:plant])
+    end
     @entries = Entry.where(status:0).order(:stick_week)
   end
-
   # GET /entries/1
   def show
   end
@@ -64,7 +66,39 @@ class EntriesController < ApplicationController
     redirect_to entries_url
   end
 
+  def projection_queue
+    @projections = Projection.ready
+  end
+
+  def projection_conversion
+    @projections = Projection.ready
+    @projections.each do |entry|
+      if params["entry_ids"] && params["entry_ids"].has_key?(entry.id.to_s)
+        @entry = Entry.new(
+            stick_week:entry.stick_week,
+            plant_id:entry.plant_id,
+            finish_week:entry.finish_week,
+            rating: 4,
+            bed_id:params["entry_bed"][entry.id.to_s],
+            greenhouse_id:params["entry_greenhouses"][entry.id.to_s],
+            location_id:params["entry_locations"][entry.id.to_s],
+            pots:params["entry_pots"][entry.id.to_s],
+            status: 0)
+        @entry.save
+        entry.destroy
+      else
+        entry.update_attributes(delay_week:current_week + 1)
+      end
+    end
+    redirect_to entries_path
+  end
+
+
   private
+
+    def check_projection_queue
+      Projection.ready.empty? ? false : true
+    end
 
     def check_bed
       entry = Entry.where(bed_id:params["entry"]["bed_id"], status:0, plant_id:params["entry"]["plant_id"], stick_week:params["entry"]["stick_week"])

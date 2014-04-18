@@ -3,7 +3,8 @@ class Plant < ActiveRecord::Base
 	serialize :finishtime
 	has_many :child_plants, :class_name => "Plant", :foreign_key => "parent_plant_id"
 	belongs_to :parent, :class_name => "Plant", :foreign_key => "parent_plant_id"
-
+	has_many :entries, dependent: :destroy
+	has_many :projections, dependent: :destroy
 	# Returns current week
 	def current_week
 		Time.now.strftime("%U").to_i + 1
@@ -12,6 +13,12 @@ class Plant < ActiveRecord::Base
 	# Pass a query, returns the pots total
 	def total_pots(query)
 		query.pluck(:pots).inject(:+)
+	end
+
+	def inventory_percent
+		total_pots = Entry.current.pluck(:pots).inject(:+)
+		total_pots_of_self = Entry.current.where(plant_id:self.id).pluck(:pots).inject(:+)
+		(total_pots_of_self.to_i / total_pots.to_i) * 100
 	end
 
 	# Polls all entries of self.plant, current and history
@@ -39,7 +46,7 @@ class Plant < ActiveRecord::Base
 		total_current = self.current(finish_week).pluck(:pots).inject(:+).to_i
 		total_projections = Projection.projected_pots_by_plant(self.id, finish_week)
 		total_expected_loss_through_projections = Projection.projected_pots_by_parent(self.id, finish_week)
-		total_current + total_projections - total_expected_loss_through_projections
+		(total_current + total_projections - total_expected_loss_through_projections) / self.ppprate
 	end
 
 end

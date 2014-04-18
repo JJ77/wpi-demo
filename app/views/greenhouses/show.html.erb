@@ -7,7 +7,6 @@
   <thead>
     <tr>
       <th>Description</th>
-      <th>Total Capacity</th>
       <th>Total Inventory</th>
     </tr>
   </thead>
@@ -15,7 +14,6 @@
   <tbody>
       <tr>
         <td><%= @greenhouse.description  %></td>
-        <td><%= @greenhouse.capacity unless @greenhouse.capacity.nil? %></td>
         <td><%= @greenhouse.total unless @greenhouse.total.nil? %></td>
 
       </tr>

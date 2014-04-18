@@ -13,7 +13,7 @@ class Entry < ActiveRecord::Base
   def current_week
       # Returns an integer representation of current week in year
       Time.now.strftime("%U").to_i + 1
-    end
+  end
 
   def ==(entry)
     return false unless self.stick_week == entry.stick_week
@@ -71,12 +71,11 @@ class Entry < ActiveRecord::Base
 
     # Relation of all entries with 0 status (current)
     def self.current
-      Self.where(status:0)
+      self.where(status:0)
     end
 
     # Relation of all entries with 1 status (history)
     def self.history
       Self.where(status:1)
     end
-
 end
