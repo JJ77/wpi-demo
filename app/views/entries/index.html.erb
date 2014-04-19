@@ -1,9 +1,9 @@
 <div class="container-fluid">
-<div class="container">
+<div class="row">
   <div class="col-xs-12">
 
     <h1>All entries</h1>
-
+  <div class="table-responsive">
     <table class="table table-striped table-condensed">
       <thead>
         <tr>
@@ -33,16 +33,16 @@
             <td><%= link_to entry.bed.name, entry.bed %></td>
             <td><%= link_to entry.greenhouse.name, entry.greenhouse %></td>
             <td><%= link_to entry.location.name, entry.location %></td>
-            <td><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-info" %></td>
-            <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'This will remove all plants from this bed.  Are you sure?' }, class:"btn btn-warning" %></td>
+            <td><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-sm btn-info" %></td>
+            <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'This will remove all plants from this bed.  Are you sure?' }, class:"btn btn-sm btn-warning" %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-
+</div>
     <br>
 
-    <%= link_to 'New Entry', new_entry_path %>
+    <%= link_to 'New Entry', new_entry_path, class:"btn btn-primary" %>
   </div>
 </div>
 </div>

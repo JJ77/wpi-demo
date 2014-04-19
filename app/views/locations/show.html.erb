@@ -2,60 +2,59 @@
 <h2>
 	<%= @location.name %>
 </h2>
-	<h4>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Address</th>
-      <th>Total Inventory</th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= @location.address  %></td>
-        <td><%= @location.total unless @location.total.nil? %></td>
-
+        <th>Address</th>
+        <th>Total Inventory</th>
       </tr>
-  </tbody>
-</table>
-</h4>
-<h5>
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= link_to "Plant", entries_path(:sort=>:plant_id) %></th>
-      <th><%= link_to "Stick Week", entries_path(:sort=>:stick_week) %></th>
-      <th><%= link_to "Hang Week", entries_path(:sort=>:hang_week) %></th>
-      <th><%= link_to "Finish Week", entries_path(:sort=>:finish_week) %></th>
-      <th><%= link_to "Rating", entries_path(:sort=>:rating) %></th>
-      <th><%= link_to "Bed", entries_path(:sort=>:bed_id) %></th>
-      <th><%= link_to "Pots", entries_path(:sort=>:pots) %></th>
-      <th><%= link_to "House", entries_path(:sort=>:greenhouse_id) %></th>
-      <th><%= link_to "Location", entries_path(:sort=>:location_id) %></th>
-    </tr>
-  </thead>
+    </thead>
 
-  <tbody>
-    <% @entries.each do |entry| %>
+    <tbody>
+        <tr>
+          <td><%= @location.address  %></td>
+          <td><%= @location.total unless @location.total.nil? %></td>
+
+        </tr>
+    </tbody>
+  </table>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= link_to entry.plant.description, edit_entry_path(entry) %></td>
-        <td><%= entry.stick_week %></td>
-        <td><%= entry.hang_week %></td>
-        <td><%= entry.finish_week %></td>
-        <td><%= entry.rating %></td>
-        <td><%= entry.bed.name %></td>
-        <td><%= entry.pots %></td>
-        <td><%= entry.greenhouse.name %></td>
-        <td><%= entry.location.name %></td>
-        <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-        <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th><%= link_to "Plant", entries_path(:sort=>:plant_id) %></th>
+        <th><%= link_to "Stick Week", entries_path(:sort=>:stick_week) %></th>
+        <th><%= link_to "Hang Week", entries_path(:sort=>:hang_week) %></th>
+        <th><%= link_to "Finish Week", entries_path(:sort=>:finish_week) %></th>
+        <th><%= link_to "Rating", entries_path(:sort=>:rating) %></th>
+        <th><%= link_to "Bed", entries_path(:sort=>:bed_id) %></th>
+        <th><%= link_to "Pots", entries_path(:sort=>:pots) %></th>
+        <th><%= link_to "House", entries_path(:sort=>:greenhouse_id) %></th>
+        <th><%= link_to "Location", entries_path(:sort=>:location_id) %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-</h5>
+    <tbody>
+      <% @entries.each do |entry| %>
+        <tr>
+          <td><%= link_to entry.plant.description, edit_entry_path(entry) %></td>
+          <td><%= entry.stick_week %></td>
+          <td><%= entry.hang_week %></td>
+          <td><%= entry.finish_week %></td>
+          <td><%= entry.rating %></td>
+          <td><%= entry.bed.name %></td>
+          <td><%= entry.pots %></td>
+          <td><%= entry.greenhouse.name %></td>
+          <td><%= entry.location.name %></td>
+          <td><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-sm btn-primary" %></td>
+          <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-warning" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= link_to 'Edit Location', edit_location_path(@location), class:'btn btn-primary' %> |
 <%= link_to 'Back', locations_path, class:'btn btn-info' %>

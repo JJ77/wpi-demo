@@ -2,77 +2,80 @@
 <h1> Greenhouse <%= @bed.greenhouse.name %> | Bed <%= @bed.name %> </h1>
 
 <h3> Current Inventory </h3>
-<table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Plant</th>
-          <th>Pots</th>
-          <th>Stick week</th>
-          <th>Hang week</th>
-          <th>Finish week</th>
-          <th>Rating</th>
-          <th>Bed</th>
-          <th>Greenhouse</th>
-          <th>Location</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @current_entries.each do |entry| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+        <thead>
           <tr>
-            <td><%= entry.plant.description %></td>
-            <td><%= entry.pots %></td>
-            <td><%= entry.stick_week %></td>
-            <td><%= entry.hang_week %></td>
-            <td><%= entry.finish_week %></td>
-            <td><%= entry.rating %></td>
-            <td><%= entry.bed.name %></td>
-            <td><%= entry.greenhouse.name %></td>
-            <td><%= entry.location.name %></td>
-            <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-            <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <th>Plant</th>
+            <th>Pots</th>
+            <th>Stick week</th>
+            <th>Hang week</th>
+            <th>Finish week</th>
+            <th>Rating</th>
+            <th>Bed</th>
+            <th>Greenhouse</th>
+            <th>Location</th>
+            <th></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% @current_entries.each do |entry| %>
+            <tr>
+              <td><%= entry.plant.description %></td>
+              <td><%= entry.pots %></td>
+              <td><%= entry.stick_week %></td>
+              <td><%= entry.hang_week %></td>
+              <td><%= entry.finish_week %></td>
+              <td><%= entry.rating %></td>
+              <td><%= entry.bed.name %></td>
+              <td><%= entry.greenhouse.name %></td>
+              <td><%= entry.location.name %></td>
+              <td><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-sm btn-primary" %></td>
+              <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-warning" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 <h3>Bed History </h3>
-<table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Plant</th>
-          <th>Pots</th>
-          <th>Stick week</th>
-          <th>Hang week</th>
-          <th>Finish week</th>
-          <th>Rating</th>
-          <th>Bed</th>
-          <th>Greenhouse</th>
-          <th>Location</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @history_entries.each do |entry| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+        <thead>
           <tr>
-            <td><%= entry.plant.description %></td>
-            <td><%= entry.pots %></td>
-            <td><%= entry.stick_week %></td>
-            <td><%= entry.hang_week %></td>
-            <td><%= entry.finish_week %></td>
-            <td><%= entry.rating %></td>
-            <td><%= entry.bed.name %></td>
-            <td><%= entry.greenhouse.name %></td>
-            <td><%= entry.location.name %></td>
-            <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-            <td><%= link_to 'Destroy', wipe_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <th>Plant</th>
+            <th>Pots</th>
+            <th>Stick week</th>
+            <th>Hang week</th>
+            <th>Finish week</th>
+            <th>Rating</th>
+            <th>Bed</th>
+            <th>Greenhouse</th>
+            <th>Location</th>
+            <th></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
 
-<%= link_to 'Edit', edit_bed_path(@bed) %> |
-<%= link_to 'Back', beds_path %>
+        <tbody>
+          <% @history_entries.each do |entry| %>
+            <tr>
+              <td><%= entry.plant.description %></td>
+              <td><%= entry.pots %></td>
+              <td><%= entry.stick_week %></td>
+              <td><%= entry.hang_week %></td>
+              <td><%= entry.finish_week %></td>
+              <td><%= entry.rating %></td>
+              <td><%= entry.bed.name %></td>
+              <td><%= entry.greenhouse.name %></td>
+              <td><%= entry.location.name %></td>
+              <td><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-sm btn-primary" %></td>
+              <td><%= link_to 'Destroy', wipe_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-warning" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+<%= link_to 'Edit', edit_bed_path(@bed), class:"btn btn-primary" %> |
+<%= link_to 'Back', beds_path, class:"btn btn-info" %>

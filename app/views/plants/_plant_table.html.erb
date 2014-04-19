@@ -1,45 +1,40 @@
-<div class="container-fluid">
-<div class="row">
-  <div class="col-xs-12">
-    <h1>All entries</h1>
-
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Pots</th>
-          <th>Stick week</th>
-          <th>Hang week</th>
-          <th>Finish week</th>
-          <th>Rating</th>
-          <th>Bed</th>
-          <th>Greenhouse</th>
-          <th>Location</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @plant.current.each do |entry| %>
+    <p class="lead">All <%= @plant.description %> entries</p>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td><%= entry.pots %></td>
-            <td><%= entry.stick_week %></td>
-            <td><%= entry.hang_week %></td>
-            <td><%= entry.finish_week %></td>
-            <td><%= entry.rating %></td>
-            <td><%= entry.bed.name %></td>
-            <td><%= entry.greenhouse.name %></td>
-            <td><%= entry.location.name %></td>
-            <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-            <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <th>Pots</th>
+            <th>Stick week</th>
+            <th>Hang week</th>
+            <th>Finish week</th>
+            <th>Rating</th>
+            <th>Bed</th>
+            <th>Greenhouse</th>
+            <th>Location</th>
+            <th></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
 
+        <tbody>
+          <% @plant.current.each do |entry| %>
+            <tr>
+              <td><%= entry.pots %></td>
+              <td><%= entry.stick_week %></td>
+              <td><%= entry.hang_week %></td>
+              <td><%= entry.finish_week %></td>
+              <td><%= entry.rating %></td>
+              <td><%= entry.bed.name %></td>
+              <td><%= entry.greenhouse.name %></td>
+              <td><%= entry.location.name %></td>
+              <td><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-sm btn-info" %></td>
+              <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-warning btn-sm" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <br>
 
-    <%= link_to 'New Entry', new_entry_path %>
-  </div>
-</div>
-</div>
+    <%= link_to 'New Entry', new_entry_path, class:"btn btn-primary" %>
+

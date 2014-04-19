@@ -1,28 +1,28 @@
 <h1>Plants</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Item code</th>
-      <th>Descripton</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @plants.each do |plant| %>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= link_to plant.item_code, plant %></td>
-        <td><%= link_to plant.description, plant %></td>
-        <td><%= link_to 'Edit', edit_plant_path(plant) %></td>
-        <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'VERY BAD IDEA! Are you sure?!' } %></td>
+        <th>Item code</th>
+        <th>Descripton</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @plants.each do |plant| %>
+        <tr>
+          <td><%= link_to plant.item_code, plant %></td>
+          <td><%= link_to plant.description, plant %></td>
+          <td><%= link_to 'Edit', edit_plant_path(plant), class:"btn btn-primary btn-sm" %></td>
+          <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'VERY BAD IDEA! Are you sure?!' }, class:"btn btn-sm btn-warning" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
-<%= link_to 'New Plant', new_plant_path %>
+<%= link_to 'New Plant', new_plant_path, class:"btn btn-primary" %>

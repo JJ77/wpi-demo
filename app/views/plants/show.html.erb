@@ -6,67 +6,69 @@
 <%end%> -->
       <br><br>
 <h3>Projected Schedule</h3>
-<h5>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <% 10.times do |week| %>
-        <th><%= "Week #{weeks_before_now(week)}" %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <% 10.times do |week| %>
-        <td> <%= @plant.projected(weeks_before_now(week)) %></td>
-      <% end %>
-    </tr>
-  </tbody>
-  <thead>
-    <tr>
-      <% 10.times do |week| %>
-        <th><%= "Week #{weeks_before_now(week + 10)}" %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <% 10.times do |week| %>
-        <td> <%= @plant.projected(weeks_before_now(week + 10)) %></td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
-</h5>
-<hr><br>
-<h3>Statistics</h3>
-<h5>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Actual Inventory</th>
-      <th>Projected Inventory</th>
-      <th>Inventory %</th>
-      <th>Rated 5</th>
-      <th>Rated 6</th>
-      <th>Rated 7</th>
 
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= @plant.actual %></td>
-        <td><%= @plant.projected %></td>
-        <td><%= @plant.inventory_percent %>%</td>
-        <td><%= @plant.rated(5) %></td>
-        <td><%= @plant.rated(6) %></td>
-        <td><%= @plant.rated(7) %></td>
+        <% 10.times do |week| %>
+          <th><%= "Week #{weeks_before_now(week)}" %></th>
+        <% end %>
       </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <tr>
+        <% 10.times do |week| %>
+          <td> <%= @plant.projected(weeks_before_now(week)) %></td>
+        <% end %>
+      </tr>
+    </tbody>
+    <thead>
+      <tr>
+        <% 10.times do |week| %>
+          <th><%= "Week #{weeks_before_now(week + 10)}" %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% 10.times do |week| %>
+          <td> <%= @plant.projected(weeks_before_now(week + 10)) %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </h5>
+  <hr><br>
+  <h3>Statistics</h3>
+  <h5>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Actual Inventory</th>
+        <th>Projected Inventory</th>
+        <th>Inventory %</th>
+        <th>Rated 5</th>
+        <th>Rated 6</th>
+        <th>Rated 7</th>
 
-</h5>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+          <td><%= @plant.actual %></td>
+          <td><%= @plant.projected %></td>
+          <td><%= @plant.inventory_percent %>%</td>
+          <td><%= @plant.rated(5) %></td>
+          <td><%= @plant.rated(6) %></td>
+          <td><%= @plant.rated(7) %></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
 <hr><br>
 <h3>Inventory Report</h3>
 <%= render 'plant_table' %>

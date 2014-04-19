@@ -1,37 +1,39 @@
 <div class ="row">
   <div class="col-lg-12">
-  <h2 class="red">
-    Projected Inventory Due to Grade
-  </h2>
-<%= form_tag projection_conversion_entries_path, method: :put do %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th width="120">Plant</th>
-      <th width="60">Stick Week</th>
-      <th>Zone</th>
-      <th width="55">Pots</th>
-      <th>House</th>
-      <th width="120">Location</th>
-      <th width="100">Roll?</th>
-    </tr>
-  </thead>
+    <h2 class="red">
+      Projected Inventory Due to Grade
+    </h2>
+    <%= form_tag projection_conversion_entries_path, method: :put do %>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th width="120">Plant</th>
+            <th width="60">Stick Week</th>
+            <th>Zone</th>
+            <th width="55">Pots</th>
+            <th>House</th>
+            <th width="120">Location</th>
+            <th width="100">Roll?</th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @projections.each do |entry| %>
-      <tr>
-        <td><%= Plant.find(entry.plant_id).description %></td>
-        <td><%= entry.parent.stick_week %></td>
-        <td><%= roll_bed_box(entry) %></td>
-        <td><%= roll_pots_box(entry) %></td>
-        <td><%= roll_greenhouse_box(entry) %></td>
-        <td><%= roll_location_box(entry) %></td>
-        <td><%= check_box_tag("entry_ids[#{entry.id}]", 1, checked = true) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
+        <tbody>
+          <% @projections.each do |entry| %>
+            <tr>
+              <td><%= Plant.find(entry.plant_id).description %></td>
+              <td><%= entry.parent.stick_week %></td>
+              <td><%= roll_bed_box(entry) %></td>
+              <td><%= roll_pots_box(entry) %></td>
+              <td><%= roll_greenhouse_box(entry) %></td>
+              <td><%= roll_location_box(entry) %></td>
+              <td><%= check_box_tag("entry_ids[#{entry.id}]", 1, checked = true) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="col-lg-12">

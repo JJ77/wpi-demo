@@ -53,7 +53,7 @@
         </div>
         <% @plantlist.each do |plant| %>
         <div class="col-xs-2">
-          <%= f.label plant.description %>
+          <%= f.label plant.description[0..8] %>
           <% if plant.id == @plant.id %>
             <%= f.radio_button :parent_plant_id, plant.id, disabled: true %>
           <% else %>
@@ -62,8 +62,8 @@
         </div>
         <% end %>
         <div class = "col-xs-2">
-          <%= f.label plant.ppprate %>
-          <%= f.text_field :ppprate, "PPP Rate", default:1 %>
+          <%= f.label :ppprate %>
+          <%= f.text_field :ppprate, default:1 %>
         </div>
       </div>
     </div>

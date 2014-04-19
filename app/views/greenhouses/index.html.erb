@@ -1,30 +1,30 @@
 <h1>Greenhouses</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Pots</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @greenhouses.each do |greenhouse| %>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= link_to greenhouse.name, greenhouse %></td>
-        <td><%= greenhouse.location.name %></td>
-        <td><%= greenhouse.total %></td>
-        <td><%= link_to 'Edit', edit_greenhouse_path(greenhouse) %></td>
-        <td><%= link_to 'Destroy', greenhouse, method: :delete, data: { confirm: 'BAD IDEA! Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Pots</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @greenhouses.each do |greenhouse| %>
+        <tr>
+          <td><%= link_to greenhouse.name, greenhouse %></td>
+          <td><%= greenhouse.location.name %></td>
+          <td><%= greenhouse.total %></td>
+          <td><%= link_to 'Edit', edit_greenhouse_path(greenhouse), class:"btn btn-sm btn-primary" %></td>
+          <td><%= link_to 'Destroy', greenhouse, method: :delete, data: { confirm: 'BAD IDEA! Are you sure?' }, class:"btn btn-sm btn-warning" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
-<%= link_to 'New Greenhouse', new_greenhouse_path %>
+<%= link_to 'New Greenhouse', new_greenhouse_path, class:"btn btn-primary" %>
