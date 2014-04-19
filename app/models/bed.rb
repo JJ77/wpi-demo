@@ -3,9 +3,20 @@ class Bed < ActiveRecord::Base
   belongs_to :greenhouse
   belongs_to :location
   validates :name, presence: true, uniqueness:true
-  private
 
-  	def set_location
-  		self.location_id = Greenhouse.find(self.greenhouse_id).location_id
+
+  	def current
+  		Entry.where(status:0, bed_id:self.id)
   	end
+
+  	def pots
+  		self.current.pluck(:pots).inject(:+)
+  	end
+
+  	private
+
+	  	def set_location
+	  		self.location_id = Greenhouse.find(self.greenhouse_id).location_id
+	  	end
 end
+

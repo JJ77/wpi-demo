@@ -5,11 +5,9 @@ class EntriesController < ApplicationController
   # GET /entries
   def index
     if check_projection_queue
-      redirect_to projection_queue_entries_path
-    elsif params[:plant]
-      redirect_to plant_path(param[:plant])
+      flash.now[:alert] = "You have plants due for grading!  #{view_context.link_to('Click here to roll projections.', projection_queue_entries_path)}".html_safe
     end
-    @entries = Entry.where(status:0).order(:stick_week)
+    @entries = Entry.where(status:0).includes(:plant, :bed).order(:stick_week)
   end
   # GET /entries/1
   def show

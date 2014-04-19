@@ -1,12 +1,7 @@
 <div class="container-fluid">
-<div class="row">
+<div class="container">
   <div class="col-xs-12">
-<div class="col-lg-3">
-  Search by plant:
-  <%= select("plant", "plant_id",
-              plant_array, {:include_blank => true},
-              { :onchange => "window.location='/plants/'+this.value;" } ) %>
-</div>
+
     <h1>All entries</h1>
 
     <table class="table table-striped table-condensed">
@@ -29,17 +24,17 @@
       <tbody>
         <% @entries.each do |entry| %>
           <tr>
-            <td><%= entry.plant.description %></td>
+            <td><%= link_to entry.plant.description, entry.plant%></td>
             <td><%= entry.pots %></td>
             <td><%= entry.stick_week %></td>
             <td><%= entry.grade_week %></td>
             <td><%= entry.finish_week %></td>
             <td><%= entry.rating %></td>
-            <td><%= entry.bed.name %></td>
-            <td><%= entry.greenhouse.name %></td>
-            <td><%= entry.location.name %></td>
-            <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-            <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to entry.bed.name, entry.bed %></td>
+            <td><%= link_to entry.greenhouse.name, entry.greenhouse %></td>
+            <td><%= link_to entry.location.name, entry.location %></td>
+            <td><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-info" %></td>
+            <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'This will remove all plants from this bed.  Are you sure?' }, class:"btn btn-warning" %></td>
           </tr>
         <% end %>
       </tbody>

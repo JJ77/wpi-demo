@@ -1,22 +1,62 @@
 <%# add navigation links to this file %>
 <% if user_signed_in? %>
+
+	<li><%= link_to "Beds", beds_path %></li>
+
+
+ 	<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entries <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+      	<li><%= link_to "Actual", entries_path %></li>
+  			<li><%= link_to "Projections", projections_path %></li>
+      </ul>
+    </li>
+
 	<li class="dropdown">
-	  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-	            <li><%= link_to "Locations", locations_path %></li>
-							<li><%= link_to "Greenhouses", greenhouses_path %></li>
-							<li><%= link_to "Beds", beds_path %></li>
-							<li><%= link_to "Plants", plants_path %></li>
-							<li><%= link_to "Entries", entries_path %></li>
-							<li><%= link_to "Projections", projections_path %></li>
-	          </ul>
-	        </li>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-  <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Plants <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+      	<li><%= link_to "All", plants_path %></li>
+        <% Plant.all.each do |plant| %>
+        <li><%= link_to plant.description, plant %></li>
+        <% end %>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Greenhouses <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+      	<li><%= link_to "All", greenhouses_path %></li>
+        <% Greenhouse.all.each do |greenhouse| %>
+        <li><%= link_to greenhouse.name, greenhouse %></li>
+        <% end %>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Locations <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+      	<li><%= link_to "All", locations_path %></li>
+        <% Location.all.each do |location| %>
+        <li><%= link_to location.name, location %></li>
+        <% end %>
+      </ul>
+    </li>
 <% else %>
+
   <li><%= link_to 'Login', new_user_session_path %></li>
   <li><%= link_to 'Sign up', new_user_registration_path %></li>
+
 <% end %>
+
 <% if user_signed_in? %>
-  <li><%= link_to 'Users', users_path %></li>
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+      	  <li><%= link_to 'Users', users_path %></li>
+  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+  <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+
+</li>
+
 <% end %>

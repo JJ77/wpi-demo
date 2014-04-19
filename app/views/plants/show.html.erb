@@ -4,13 +4,7 @@
 <!--<% @plant.child_plants.each do |plant| %>
 <span id="child"><%= link_to plant.description, plant %></span>
 <%end%> -->
-  <div class="col-lg-3">
-      Search by plant:
-      <%= select("plant", "id",
-                  plant_array, {:include_blank => true},
-                  { :onchange => "window.location='/plants/'+this.value;" } ) %>
-    </div>
-    <hr><br>
+      <br><br>
 <h3>Projected Schedule</h3>
 <h5>
 <table class="table table-striped">
