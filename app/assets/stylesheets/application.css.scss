@@ -14,3 +14,13 @@
  *= require_self
  */
 
+.page-break {
+display:block;
+clear:both;
+page-break-after:always;
+}
+
+td div, th div{
+    page-break-inside: avoid !important;
+}
+
