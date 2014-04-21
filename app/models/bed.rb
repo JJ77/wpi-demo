@@ -3,7 +3,6 @@ class Bed < ActiveRecord::Base
   belongs_to :greenhouse
   belongs_to :location
   has_many :entries
-  validates :name, presence: true, uniqueness:true
 
 
   	def current

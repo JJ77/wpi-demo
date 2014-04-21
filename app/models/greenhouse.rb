@@ -1,6 +1,9 @@
 class Greenhouse < ActiveRecord::Base
   belongs_to :location
   has_many :beds, dependent: :destroy
+  validates :name, presence: true
+  validates :location_id, presence: true
+
 
   # Array of all beds in greenhouse
   def beds

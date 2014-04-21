@@ -4,7 +4,7 @@ class GreenhousesController < ApplicationController
   # GET /greenhouses
   # GET /greenhouses.json
   def index
-    @greenhouses = Greenhouse.all
+    @greenhouses = Greenhouse.all.order(:location_id,:name)
   end
 
   # GET /greenhouses/1
@@ -26,15 +26,16 @@ class GreenhousesController < ApplicationController
   # POST /greenhouses.json
   def create
     @greenhouse = Greenhouse.new(greenhouse_params)
-
-    respond_to do |format|
-      if @greenhouse.save
-        format.html { redirect_to greenhouses_path, notice: 'Greenhouse was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @greenhouse }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @greenhouse.errors, status: :unprocessable_entity }
+    @bed_builder = params["bed_builder"].to_i
+    if @greenhouse.save
+      unless @bed_builder.nil?
+        @bed_builder.times do |bed_number|
+          Bed.create(name:bed_number + 1, greenhouse_id:@greenhouse.id)
+        end
       end
+      redirect_to greenhouses_path, notice: 'Greenhouse was successfully created.'
+    else
+      render action: 'new'
     end
   end
 

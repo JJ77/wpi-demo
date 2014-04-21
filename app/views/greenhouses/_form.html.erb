@@ -26,7 +26,12 @@
       <%= f.radio_button :location_id, location.id %>
   <% end %>
   </div>
+    <div class="field">
+      <%= label_tag "Fast bed builder" %>
+      <%= text_field_tag "bed_builder" %>
+      Note: Only creates beds with digits as names, no text!
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class:"btn btn-primary" %>
   </div>
 <% end %>
