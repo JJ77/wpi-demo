@@ -5,7 +5,7 @@
       <tr>
         <th>Name</th>
         <th>Address</th>
-        <th></th>
+        <th>Report</th>
         <th></th>
         <th></th>
       </tr>
@@ -16,6 +16,7 @@
         <tr>
           <td><%= link_to location.name, location %></td>
           <td><%= location.address %></td>
+          <td><%= link_to "Full Inventory Report", inventory_report_location_path(location, :format => :pdf), class:"btn btn-info btn-sm" %></td>
           <td><%= link_to 'Edit', edit_location_path(location), class:"btn btn-sm btn-primary" %></td>
           <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-warning' %></td>
         </tr>
@@ -25,5 +26,4 @@
 </div>
 
 <br>
-
 <%= link_to 'New Location', new_location_path %>

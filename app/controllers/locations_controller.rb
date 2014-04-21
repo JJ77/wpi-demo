@@ -62,6 +62,17 @@ class LocationsController < ApplicationController
     end
   end
 
+  def inventory_report
+    respond_to do |format|
+      format.pdf do
+            @location = Location.find(params[:id])
+            @greenhouses = Greenhouse.where(location_id:params[:id])
+            render :pdf => "inventory_report",
+                   :template => 'locations/inventory_report.pdf.erb'
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location

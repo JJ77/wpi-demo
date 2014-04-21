@@ -1,0 +1,58 @@
+<%= wicked_pdf_stylesheet_link_tag "application" %>
+<%= wicked_pdf_javascript_include_tag "application" %>
+
+<% @greenhouses.each do |greenhouse| %>
+<% @beds = greenhouse.beds.order(:name) %>
+  <h2>
+  	<%= @location.name + "|" + greenhouse.name %>
+  </h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Total Inventory</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <tr>
+            <td><%= greenhouse.total %></td>
+
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Bed</th>
+          <th>Plant</th>
+          <th>Total</th>
+          <th>Rating</th>
+          <th>Stick Week</th>
+          <th>Hang Week</th>
+          <th>Finish Week</th>
+          <th width="300">Notes</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @beds.each do |bed| %>
+          <% bed.current.each do |entry| %>
+          <tr>
+            <td><%= bed.name %></td>
+            <td><%= Plant.find(entry.plant_id).description.to_s %></td>
+            <td><%= entry.pots.to_s %></td>
+            <td><%= entry.rating.to_s %></td>
+            <td><%= entry.stick_week.to_s %></td>
+            <td><%= entry.hang_week.to_s %></td>
+            <td><%= entry.finish_week.to_s %></td>
+            <td width="300"></td>
+          </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

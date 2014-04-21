@@ -17,7 +17,11 @@ Wpi::Application.routes.draw do
 
   resources :greenhouses
 
-  resources :locations
+  resources :locations do
+    member do
+      get :inventory_report
+    end
+  end
 
   root :to => "home#index"
   devise_for :users, :controllers => {:registrations => "registrations"}

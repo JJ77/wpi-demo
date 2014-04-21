@@ -2,6 +2,7 @@ class Bed < ActiveRecord::Base
   before_save :set_location
   belongs_to :greenhouse
   belongs_to :location
+  has_many :entries
   validates :name, presence: true, uniqueness:true
 
 
