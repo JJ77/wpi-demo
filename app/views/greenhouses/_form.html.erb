@@ -27,10 +27,13 @@
   <% end %>
   </div>
     <div class="field">
-      <%= label_tag "Fast bed builder" %>
+      <%= label_tag "Fast bed builder" %><br>
       <%= text_field_tag "bed_builder" %>
-      Note: Only creates beds with digits as names, no text!
-  </div>
+      <button id="popover" type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="The fast bed builder will automagically create as many beds as entered and name them from 1 upto the total number of beds.">
+        ?
+      </button>
+    </div>
+
   <div class="actions">
     <%= f.submit class:"btn btn-primary" %>
   </div>

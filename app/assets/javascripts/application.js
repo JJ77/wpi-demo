@@ -15,3 +15,8 @@
 //= require bootstrap
 //= require_tree .
 
+$(function () {
+  $('#popover').popover({
+    html : true
+  }).popover('hide');
+});

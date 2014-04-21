@@ -1,5 +1,4 @@
 $ ( document ).ready(function() {
-
     var plant = $('#entry_plant_id');
     var previous = '';
     var pots = $( "#entry_pots" );
@@ -42,3 +41,4 @@ $ ( document ).ready(function() {
     });
 
 });
+
