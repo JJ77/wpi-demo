@@ -85,3 +85,10 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+
+@media print {
+  a[href]:after {
+    content: none;
+  }
+}
+

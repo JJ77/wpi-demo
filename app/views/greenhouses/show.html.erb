@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p class="hidden-print" id="notice"><%= notice %></p>
 <h2>
 	<%= @greenhouse.name %>
 </h2>
@@ -48,16 +48,16 @@
           <td><%= entry.pots %></td>
           <td><%= entry.greenhouse.name %></td>
           <td><%= entry.location.name %></td>
-          <td><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-primary btn-sm" %></td>
-          <td><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-warning btn-sm" %></td>
+          <td class="hidden-print"><%= link_to 'Edit', edit_entry_path(entry), class:"btn btn-primary btn-sm" %></td>
+          <td class="hidden-print"><%= link_to 'Clear Bed', entry, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-warning btn-sm" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
-
+<div class="hidden-print">
 <%= link_to 'Edit Greenhouse', edit_greenhouse_path(@greenhouse), class:'btn btn-primary' %> |
 <%= link_to 'Back', greenhouses_path, class:'btn btn-info' %>
-
 <hr>
+</div>

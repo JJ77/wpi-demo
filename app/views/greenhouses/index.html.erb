@@ -7,8 +7,8 @@
         <th>Location</th>
         <th>Pots</th>
         <th></th>
-        <th></th>
-        <th></th>
+        <th class="hidden-print"></th>
+        <th class="hidden-print"></th>
       </tr>
     </thead>
 
@@ -18,8 +18,8 @@
           <td><%= link_to greenhouse.name, greenhouse %></td>
           <td><%= greenhouse.location.name %></td>
           <td><%= greenhouse.total %></td>
-          <td><%= link_to 'Edit', edit_greenhouse_path(greenhouse), class:"btn btn-sm btn-primary" %></td>
-          <td><%= link_to 'Destroy', greenhouse, method: :delete, data: { confirm: 'BAD IDEA! Are you sure?' }, class:"btn btn-sm btn-warning" %></td>
+          <td class="hidden-print"><%= link_to 'Edit', edit_greenhouse_path(greenhouse), class:"btn btn-sm btn-primary" %></td>
+          <td class="hidden-print"><%= link_to 'Destroy', greenhouse, method: :delete, data: { confirm: 'BAD IDEA! Are you sure?' }, class:"btn btn-sm btn-warning" %></td>
         </tr>
       <% end %>
     </tbody>
