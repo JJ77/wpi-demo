@@ -2,7 +2,7 @@
 <%= wicked_pdf_javascript_include_tag "application" %>
 
 <% @greenhouses.each do |greenhouse| %>
-<% @beds = greenhouse.beds.order(:name) %>
+<% @beds = greenhouse.beds.sort_by { |bed| (bed.name.to_i) } %>
   <h2>
   	<%= @location.name + "|" + greenhouse.name %>
   </h2>

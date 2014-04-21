@@ -4,7 +4,7 @@ class BedsController < ApplicationController
   # GET /beds
   # GET /beds.json
   def index
-    @beds = Bed.all
+    @beds = Bed.all.sort_by { |bed| (bed.name.to_i) }
   end
 
   # GET /beds/1
