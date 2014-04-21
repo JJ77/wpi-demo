@@ -25,6 +25,7 @@ class EntriesController < ApplicationController
   # POST /entries
   def create
     @entry = Entry.new(entry_params)
+    @entry.set_finish_week
     if check_bed && @entry.save
       params[:projections].each do |key, value|
         create_projection(key, value, @entry)
@@ -40,13 +41,19 @@ class EntriesController < ApplicationController
   def update
     @old_entry = Entry.find(params[:id])
     @entry = Entry.new(entry_params)
+
     unless @old_entry == @entry
       @old_entry.update_attributes(status:1)
+      @entry.rating_to_finish_week_conversion if @entry.rating > 4 && @entry.rating != @old_entry.rating
       @entry.save
-      params[:projections].each do |key, value|
-        update_projection(key, value, @entry)
+
+      unless params[:projections].nil?
+        params[:projections].each do |key, value|
+          update_projection(key, value, @entry)
+        end
       end
       redirect_to entries_path, notice: 'Entry was successfully updated.'
+
     else
       redirect_to entries_path
       flash.alert = 'No changes were found for entry.'

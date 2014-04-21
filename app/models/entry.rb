@@ -5,7 +5,7 @@ class Entry < ActiveRecord::Base
   belongs_to :greenhouse
   belongs_to :location
   before_save :set_greenhouse, :set_location
-  before_create :set_finish_week, :set_status, :set_rating
+  before_create :set_status
 
 
 
@@ -19,6 +19,7 @@ class Entry < ActiveRecord::Base
     return false unless self.stick_week == entry.stick_week
     return false unless self.pots == entry.pots
     return false unless self.plant_id == entry.plant_id
+    return false unless self.rating == entry.rating
     true
   end
 
@@ -26,15 +27,26 @@ class Entry < ActiveRecord::Base
       # Uses week_array to find difference between stick_week and finish_week
       # Then takes 0.667 of that difference and returns the grade week based
       # on that number.  Grade week occurs 2/3rds into growth cycle.
-      weeks_array = (1..52).to_a
-      weeks_array.rotate!(weeks_array.index((self.stick_week + (self.growth_cycle * 0.6667)).round))
-      weeks_array[0]
+      if Plant.find(self.plant_id).has_children?
+        weeks_array = (1..52).to_a
+        weeks_array.rotate!(weeks_array.index((self.stick_week + (self.growth_cycle * 0.6667)).round))
+        weeks_array[0]
+      else
+        "0"
+      end
     end
 
     def growth_cycle
       weeks_array = (1..52).to_a
       weeks_array.rotate!(weeks_array.index(self.stick_week))
       growth_cycle = weeks_array.index(self.finish_week)
+    end
+
+    def set_finish_week
+      week_array = (1..52).to_a
+      finishtime = Plant.find(self.plant_id).finishtime[self.stick_week]
+      week_array.rotate!(week_array.index(self.stick_week) + finishtime.to_i)
+      self.finish_week = week_array[0]
     end
 
   private
@@ -52,21 +64,21 @@ class Entry < ActiveRecord::Base
   	end
 
     # Callback to set finish_week before create
-  	def set_finish_week
-  		week_array = (1..52).to_a
-      finishtime = Plant.find(self.plant_id).finishtime[self.stick_week]
-      week_array.rotate!(week_array.index(self.stick_week) + finishtime.to_i)
+
+
+    def rating_to_finish_week_conversion
+      week_array = (1..52).to_a
+      if self.rating = 5
+        week_array.rotate!(week_array.index(self.current_week + 1))
+      elsif self.rating = 6
+        week_array.rotate!(week_array.index(self.current_week))
+      end
       self.finish_week = week_array[0]
-  	end
+    end
 
     # Callback to set status before create
     def set_status
       self.status = 0
-    end
-
-    # Callback to set rating before create
-    def set_rating
-      self.rating = 1
     end
 
     # Relation of all entries with 0 status (current)

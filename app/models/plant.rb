@@ -6,8 +6,15 @@ class Plant < ActiveRecord::Base
 	has_many :entries, dependent: :destroy
 	has_many :projections, dependent: :destroy
 	# Returns current week
+
 	def current_week
 		Time.now.strftime("%U").to_i + 1
+	end
+
+	#Build array of all ids used for parent_plant_ids and compares self to determine if self has children plants
+	def has_children?
+		array_of_parent_ids = Plant.where.not(parent_plant_id:nil).pluck(:parent_plant_id)
+		array_of_parent_ids.include?(self.id)
 	end
 
 	# Pass a query, returns the pots total
