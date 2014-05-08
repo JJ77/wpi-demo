@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20140418152533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "beds", force: true do |t|
     t.string   "name"
@@ -126,18 +125,5 @@ ActiveRecord::Schema.define(version: 20140418152533) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
-
-  create_table "zones", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "capacity"
-    t.integer  "location_id"
-    t.integer  "greenhouse_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "zones", ["greenhouse_id"], name: "index_zones_on_greenhouse_id", using: :btree
-  add_index "zones", ["location_id"], name: "index_zones_on_location_id", using: :btree
 
 end

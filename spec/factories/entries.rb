@@ -8,9 +8,9 @@ FactoryGirl.define do
     finish_week 1
     rating 1
     status 1
-    plant nil
-    bed nil
-    greenhouse nil
-    location nil
+    plant
+    bed
+    greenhouse
+    location
   end
 end

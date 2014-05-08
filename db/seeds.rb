@@ -12,8 +12,7 @@ roles.each do |role|
   puts 'role: ' << role
 end
 puts 'DEFAULT USERS'
-user = User.find_or_create_by_email :name => "Alan Reichwein", :email => "Alan@whistlingpinesfoliage.com", :password => "changeme", :password_confirmation => "changeme"
-user = User.find_or_create_by_email :name => "Doug Reichwein", :email => "Doug@whistlingpinesfoliage.com", :password => "changeme", :password_confirmation => "changeme"
+user = User.find_or_create_by_email :name => "Test User", :email => "testuser@test.com", :password => "password", :password_confirmation => "password"
 puts 'user: ' << user.name
 user.add_role :admin
 

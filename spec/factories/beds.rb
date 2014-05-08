@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :bed do
     name "MyString"
-    capacity "MyString"
-    greenhouse nil
-    location nil
+    capacity 1000
+    greenhouse
+    location
   end
 end

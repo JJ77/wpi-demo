@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :greenhouse do
     name "MyString"
     description "MyString"
-    location nil
+    location
   end
 end
